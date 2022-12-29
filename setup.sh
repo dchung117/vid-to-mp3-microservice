@@ -8,6 +8,7 @@ if ! [ -x "$(command -v docker)" ];
 then curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
 	sudo usermod -aG docker $USER && newgrp docker # give sudo privileges to USER
+	rm get-docker.sh
 else echo "Docker already installed."
 fi
 
@@ -35,3 +36,4 @@ then curl -sS https://webinstall.dev/k9s | bash
 else echo "K9s already installed."
 fi
 
+# todo: install/upgrade python to 3.10, install mysql
