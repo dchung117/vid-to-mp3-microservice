@@ -39,19 +39,19 @@ fi
 
 # Install python3.10
 sudo apt install python3.10
-#OLD_VERSION="$(python3 --version | grep '^Python 3\.')"
-#echo $OLD_VERSION
+OLD_VERSION="$(python3 --version | grep '^Python 3\.')"
+echo $OLD_VERSION
 
-#IFS="."
-#read -ra arr <<< "$OLD_VERSION"
-#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.${arr[1]} 1 # add old version to alternative list
-#sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 2 # add new version
-#sudo update-alternatives --config python3
-#sudo rm /usr/bin/python3 # remove old symlink
-#sudo ln -s python 3.10 /usr/bin/python3 # update symlink to python3.10
+IFS="."
+read -ra arr <<< "$OLD_VERSION"
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.${arr[1]} 1 # add old version to alternative list
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 2 # add new version
+sudo update-alternatives --config python3
+sudo ln -s python 3.10 /usr/bin/python3 # update symlink to python3.10
 python3 --version
+
 # Install MySQL
 if ! [ -x "$(command -v mysql)" ]
-then sudo snap install mysql-shell
+then sudo apt install mysql-client-core-8.0
 else echo "MySQL already installed."
 fi
