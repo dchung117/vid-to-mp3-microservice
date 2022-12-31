@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Update apt
-sudo apt update
-sudo apt upgrade
+sudo apt update -y
+sudo apt upgrade -y
 
 # Install docker
 if ! [ -x "$(command -v docker)" ];
@@ -38,7 +38,9 @@ else echo "K9s already installed."
 fi
 
 # Install python3.10
-sudo apt install python3.10
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo apt install python3.10 -y
 OLD_VERSION="$(python3 --version | grep '^Python 3\.')"
 echo $OLD_VERSION
 
