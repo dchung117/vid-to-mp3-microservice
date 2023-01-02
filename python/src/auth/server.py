@@ -47,3 +47,46 @@ def login():
             return create_jwt(username, os.environ.get("JWT_SECRET"), True)
     else:
         return "Invalid credentials", 401
+
+@server.route("/validate", method=["POST"])
+def validate():
+    # Get encoded JWT
+    encoded_jwt = request.headers["authorization"]
+
+    # Return error if missing auth
+    if not encoded_jwt:
+        return "No authorization", 401
+    
+    # Split encoded_jwt
+    auth_type, enc_token = encoded_jwt.split(" ")
+
+    # Return error if auth_type is not bearer
+    if auth_type != "Bearer":
+        return "Not authorized.", 403
+    
+    # Decode the token
+    try:
+        dec_token = jwt.decode(enc_token, os.environ.get("JWT_SECRET"), algorithm="HS256")
+    except:
+        return "Not authorized", 403
+    
+    return dec_token, 200
+
+def create_jwt(username: str, secret: str, is_admin: bool):
+    """
+    Generate JWT for validated user.
+    """
+    return jwt.encode(
+        payload={
+            "username": username,
+            "exp": datetime.datetime.utcnow() + datetime.timedelta(days=1), # token valid for one day
+            "iat": datetime.datetime.utcnow(),
+            "admin": is_admin
+            },
+        key=secret,
+        algorithm="HS256"
+    )
+
+if __name__ == "__main__":
+    # run server on port 5000
+    server.run(host="0.0.0.0", port=5000)
