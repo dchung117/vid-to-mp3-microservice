@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Update apt
-sudo apt update -y
-sudo apt upgrade -y
+sudo apt-get update && apt-get install -y --no-install-recommends --no-install-suggests
 
 # Install docker
 if ! [ -x "$(command -v docker)" ];
