@@ -7,9 +7,9 @@ sudo apt-get update && apt-get install -y --no-install-recommends --no-install-s
 if ! [ -x "$(command -v docker)" ];
 then curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
-	sudo usermod -aG docker $USER && newgrp docker # give sudo privileges to USER
 	rm get-docker.sh
 else echo "Docker already installed."
+sudo usermod -aG docker $USER && newgrp docker # give sudo privileges to USER
 fi
 
 # Install kubernetes
