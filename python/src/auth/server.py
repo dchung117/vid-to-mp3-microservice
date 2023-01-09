@@ -17,7 +17,7 @@ server.config["MYSQL_PORT"] = os.environ.get("MYSQL_PORT")
 
 # Create routes
 @server.route("/login", methods=["POST"])
-def login():
+def login() -> tuple[str, int]:
     # retrieve login authentication header
     auth = request.authorization
     if not auth:
@@ -49,7 +49,7 @@ def login():
         return "Invalid credentials", 401
 
 @server.route("/validate", methods=["POST"])
-def validate():
+def validate() -> tuple[str, int]:
     # Get encoded JWT
     encoded_jwt = request.headers["authorization"]
 
@@ -72,7 +72,7 @@ def validate():
     
     return dec_token, 200
 
-def create_jwt(username: str, secret: str, is_admin: bool):
+def create_jwt(username: str, secret: str, is_admin: bool) -> tuple[str, int]:
     """
     Generate JWT for validated user.
     """
