@@ -5,7 +5,7 @@ from flask_mysqldb import MySQL
 # Create server (registry for views, URLs, template configs, etc.)
 server = Flask(__name__)
 
-# Create mysql object
+# Create mysql object (database to store user credentials)
 mysql = MySQL(server)
 
 # Set up config
