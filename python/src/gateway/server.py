@@ -16,7 +16,7 @@ server = Flask(__name__)
 # Initialize mongo db uri
 server.config["MONGO_URI"] = "mongodb://host.minikube.internal:27017/videos"
 
-# Allow PyMongo to manage connections between server and mongo db
+# Allow PyMongo to manage connections between server and mongo db (store video and converted mp3 files)
 mongo = PyMongo(server)
 
 # Use MongoDB grid fs (grid file storage) (i.e. spec for storing large files in shards)
