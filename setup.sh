@@ -9,8 +9,9 @@ then curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
 	rm get-docker.sh
 else echo "Docker already installed."
-fi
 sudo usermod -aG docker $USER && newgrp docker # give sudo privileges to USER
+fi
+
 
 # Install kubernetes
 if ! [ -x "$(command -v kubectl)" ];

@@ -1,4 +1,5 @@
 import jwt, datetime, os
+from typing import Union
 from flask import Flask, request
 from flask_mysqldb import MySQL
 
@@ -49,9 +50,9 @@ def login() -> tuple[str, int]:
         return "Invalid credentials", 401
 
 @server.route("/validate", methods=["POST"])
-def validate() -> tuple[str, int]:
+def validate() -> Union[str, tuple[str, int]]:
     # Get encoded JWT
-    encoded_jwt = request.headers["authorization"]
+    encoded_jwt = request.headers["Authorization"]
 
     # Return error if missing auth
     if not encoded_jwt:
