@@ -33,6 +33,7 @@ then curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-l
 else
 	echo "Minikube already installed."
 fi
+minikube start
 
 # Install k9s
 if ! [ -x "$(command -v k9s)" ];
@@ -68,3 +69,7 @@ fi
 
 # Install mysqlclient dependencies
 sudo apt install python3.10-dev default-libmysqlclient-dev build-essential -y
+
+# Initialize auth service SQL db
+cd python/src/auth
+sudo mysql -u root < init.sql
