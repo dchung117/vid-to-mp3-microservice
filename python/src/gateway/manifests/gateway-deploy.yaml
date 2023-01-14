@@ -23,6 +23,6 @@ spec:
           image: dchung117/vid-to-mp3-microservice-gateway
           envFrom:
             - configMapRef:
-              name: gateway-configmap
+                name: gateway-configmap
             - secretRef:
-              name: gateway-secret
+                name: gateway-secret

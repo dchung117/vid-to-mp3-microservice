@@ -9,7 +9,7 @@ then curl -fsSL https://get.docker.com -o get-docker.sh
 	sudo sh get-docker.sh
 	rm get-docker.sh
 else echo "Docker already installed."
-sudo usermod -aG docker $USER && newgrp docker # give sudo privileges to USER
+sudo usermod -aG docker $USER # give sudo privileges to USER
 fi
 
 
