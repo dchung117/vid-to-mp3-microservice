@@ -34,6 +34,7 @@ else
 	echo "Minikube already installed."
 fi
 minikube start
+minikube addons enable ingress
 
 # Install k9s
 if ! [ -x "$(command -v k9s)" ];
