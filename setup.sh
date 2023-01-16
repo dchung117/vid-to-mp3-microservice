@@ -33,8 +33,8 @@ then curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-l
 else
 	echo "Minikube already installed."
 fi
-minikube start
-minikube addons enable ingress
+# minikube start
+# minikube addons enable ingress
 
 # Install k9s
 if ! [ -x "$(command -v k9s)" ];
