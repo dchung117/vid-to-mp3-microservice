@@ -4,7 +4,7 @@ import time
 
 import pika
 from pika.channel import Channel
-from pika.spec import BasicDeliver
+from pika.spec import Basic
 from pika.spec import BasicProperties
 
 from pymongo import MongoClient
@@ -30,7 +30,7 @@ def main():
     )
     channel = connection.channel()
 
-    def callback(channel: Channel, method: BasicDeliver, properties: BasicProperties, body: bytes):
+    def callback(channel: Channel, method: Basic.Deliver, properties: BasicProperties, body: bytes):
         # Convert video to MP3
         err = to_mp3.start(body, fs_vid, fs_mp3, channel)
         if err:
@@ -41,7 +41,7 @@ def main():
             channel.basic_ack(delivery_tag=method.delivery_tag)
 
     # Bind channel to video queue for video processing
-    channel.basic_consume(
+    channel.basic_consume( \
         queue=os.environ.get("VID_QUEUE"),
         on_message_callback=callback
     )
