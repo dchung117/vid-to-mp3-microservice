@@ -14,7 +14,7 @@ server.config["MYSQL_HOST"] = os.environ.get("MYSQL_HOST")
 server.config["MYSQL_USER"] = os.environ.get("MYSQL_USER")
 server.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
 server.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
-server.config["MYSQL_PORT"] = os.environ.get("MYSQL_PORT")
+server.config["MYSQL_PORT"] = int(os.environ.get("MYSQL_PORT"))
 
 # Create routes
 @server.route("/login", methods=["POST"])
@@ -29,16 +29,16 @@ def login() -> tuple[str, int]:
     password = auth.password
 
     # create mysql cursor
-    cursor = mysql.connection.cursor()
+    cur = mysql.connection.cursor()
     
     # query user table
-    res = cursor.execute(
-        f"SELECT email, password FROM user WHERE email={username}"
+    res = cur.execute(
+        "SELECT email, password FROM user WHERE email=%s", (username, )
     )
 
     # Validate login
     if res > 0:
-        user_row = cursor.fetch(1)
+        user_row = cur.fetchone()
         email, password_db = user_row[0], user_row[1]
 
         # Check if provided email and password are valid

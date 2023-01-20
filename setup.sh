@@ -74,3 +74,9 @@ sudo apt install python3.10-dev default-libmysqlclient-dev build-essential -y
 # Initialize auth service SQL db
 cd python/src/auth
 sudo mysql -u root < init.sql
+
+# Install youtube-dl
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+
+rm -rf ~/Downloads

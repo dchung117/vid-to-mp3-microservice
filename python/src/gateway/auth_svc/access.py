@@ -19,6 +19,6 @@ def login(req: request) -> tuple[str, int]:
     
     # Check response status
     if response.status_code == 200:
-        return response.txt, None
+        return response.text, None
     else:
-        return None, (response.txt, response.status_code)
+        return None, (response.text, response.status_code)
