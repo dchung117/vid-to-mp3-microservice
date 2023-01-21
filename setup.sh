@@ -74,3 +74,15 @@ sudo apt install python3.10-dev default-libmysqlclient-dev build-essential -y
 # Initialize auth service SQL db
 cd python/src/auth
 sudo mysql -u root < init.sql
+
+# Install youtube-dl
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+
+# Install Mongodb
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+rm -rf ~/Downloads

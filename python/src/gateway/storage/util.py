@@ -9,6 +9,7 @@ def upload(file: FileStorage, grid_fs: GridFS, channel: BlockingChannel, valid_a
     try:
         fid = grid_fs.put(file)
     except Exception as err:
+        print(err)
         return "Internal server error", 500
     
     # Create message to pass to queue
@@ -27,8 +28,9 @@ def upload(file: FileStorage, grid_fs: GridFS, channel: BlockingChannel, valid_a
                 delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE # queue and messages are retained if a pod needs to be restarted
             )
         )
-    except:
+    except Exception as err:
         # Delete video file from mongodb if enqueue fails
+        print(err)
         grid_fs.delete(file_id=fid)
         
         return "Internal server error", 500
