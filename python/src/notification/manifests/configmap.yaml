@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: notification-configmap
 data:
-  HOST_ADDRESS: vidtoaudio-noreply@gmail.com
   MP3_QUEUE: mp3
