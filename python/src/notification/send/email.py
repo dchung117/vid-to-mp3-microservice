@@ -24,11 +24,12 @@ def notify(message: bytes) -> Optional[Exception]:
         msg["To"] = receiver_address
 
         # Create SMTP session to send email
-        sess = smtplib.SMTP("smtp.gmail.com")
+        sess = smtplib.SMTP("smtp.gmail.com", port=587)
         sess.starttls() # TLS mode
         sess.login(sender_address, sender_password)
         sess.send_message(msg, from_addr=sender_address, to_addrs=receiver_address)
         sess.quit()
+        print("Sent email.")
     except Exception as err:
         print(err)
         return err
